@@ -1,0 +1,85 @@
+{
+  "name": "Zolo",
+  "short_name": "zolo",
+  "description": "Tiện tích hỗ trợ cho Zing Mp3, Zing TV, Talk TV, NhacCuaTui...",
+  "version": "1.3.1",
+  "manifest_version": 2,
+
+  "icons": {
+    "16": "img/icon_16.png",
+    "48": "img/icon_48.png",
+    "128": "img/icon_128.png"
+  },
+
+  "background": {
+    "scripts": ["js/browser_support.js", "js/settings.js", "js/analytics.js", "js/talktv.js", "js/background.js"]
+  },
+
+  "minimum_chrome_version": "31.0",
+
+  "options_page": "options.html",
+  "options_ui": {
+    "page": "options.html",
+    "chrome_style": true
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["http://mp3.zing.vn/*"],
+      "js": ["js/browser_support.js", "js/song_manager.js", "js/utils.js", "js/cs/zingmp3_cs.js"],
+      "css": ["css/zingmp3.css"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["http://tv.zing.vn/*"],
+      "js": ["js/browser_support.js", "js/settings.js", "js/utils.js", "js/cs/zingtv_cs.js"],
+      "css": ["css/zingtv.css"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["http://talktv.vn/*"],
+      "js": ["js/browser_support.js", "js/settings.js", "js/utils.js", "js/talktv.js", "js/cs/talktv_cs.js"],
+      "css": ["css/talktv.css"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["http://*.nhaccuatui.com/*"],
+      "js": ["js/browser_support.js", "js/song_manager.js", "js/cs/nct_cs.js"],
+      "css": ["css/nct.css"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "page_action": {
+    "default_icon": {
+      "19": "img/icon_19.png",
+      "38": "img/icon_38.png"
+    },
+    "default_title": "Tùy chỉnh Zolo"
+  },
+
+  "web_accessible_resources": [
+    "img/*",
+    "js/*",
+    "css/*"
+  ],
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuTFX3XPbS6Y9bTUFr1i/1wyIw77VKbBthYyTKF1yU5hKbW6oVC0iJNvsjMXtJR5JRxVz8z1DGj3m0PgSkTJ01Rta/FKHcJHoUZCnKxtvduFG+5DD2vLq0v8qjVrImLNTCBEInfp9ZGQxyq22se797BIy35QsNULTbKQYxuhYyAJU2kxTkBctSdcrhzfuLjjnOtbYJeV6HzRnilwpdHt+Xnqf9GFJREZonAqyKsEVfPAncjc66lkx/5EA2wz3rTloTbSEi2TPpu7p7YwZGKnC3tmRs29mCRBLGUb1xLn7afha054/IMCxKLzz8C0MCSY42+fBpS2VkViDmvsh4+GpJQIDAQAB",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
+
+  "permissions": [
+    "storage",
+    "downloads",
+    "webRequest",
+    "webRequestBlocking",
+    "contextMenus",
+
+    "*://*.zing.vn/*",
+    "*://*.talktv.vn/*",
+    "*://*.nhaccuatui.com/*",
+
+    "*://*.adtimaserver.vn/*",
+    "*://api.nas.nct.vn/",
+
+    "*://zolo.codekiem.com/*"
+  ]
+}
